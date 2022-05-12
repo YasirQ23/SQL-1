@@ -14,7 +14,7 @@ where amount < 5.99 and amount > 3.99;
 select film_id
 from inventory
 group by film_id 
-order by count(*) desc
+order by count(film_id) desc
 limit 1;
 -- The store has the most copies of Curtain Videotape aka film_id 200
 
@@ -28,7 +28,7 @@ where last_name like 'William';
 select staff_id
 from rental
 group by staff_id 
-order by count(*) desc
+order by count(staff_id) desc
 limit 1;
 -- Mike aka staff_id 1 sold the most rentals or is it rented out the most rentals?
 
@@ -42,7 +42,7 @@ from address;
 select film_id
 from film_actor
 group by film_id 
-order by count(*) desc 
+order by count(film_id) desc 
 limit 1;
 -- The movie Lambs Cincinatti had the most actors in it
 
@@ -63,8 +63,12 @@ having count(amount) > 250;
 
 --10. Within the film table, how many rating categories are there? And what rating has the most
 --movies total?
-select rating,count(rating)
+select count(distinct rating)
+from film;
+
+select rating
 from film
 group by rating
-order by count(rating) desc;
+order by count(rating) desc
+limit 1;
 --there are 5 differnt ratings and pg-13 has the most films with 223
